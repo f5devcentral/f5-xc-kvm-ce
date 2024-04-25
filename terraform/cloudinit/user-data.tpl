@@ -33,9 +33,9 @@ write_files:
     permissions: 0644
     owner: root
     content: |
-      active: kvm-regular-nic-voltmesh
+      active: ${certified-hw}
       certifiedHardware:
-        kvm-regular-nic-voltmesh:
+        ${certified-hw}:
           Vpm:
             PrivateNIC: eth0
           outsideNic:

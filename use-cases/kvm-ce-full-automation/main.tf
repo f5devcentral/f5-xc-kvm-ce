@@ -27,6 +27,7 @@ data "template_file" "kvm-ce-user_data" {
     "host-name"                           = var.kvm-ce-node-name
     "latitude"                            = var.kvm-ce-latitude
     "longitude"                           = var.kvm-ce-longitude
+    "certified-hw"                        = var.kvm-ce-certified-hw
   }
 }
 
@@ -52,8 +53,6 @@ resource "libvirt_cloudinit_disk" "kvm-ce-cloudinit" {
 }
 
 resource "libvirt_domain" "kvm-ce" {
-  depends_on = [ volterra_volterra_securemesh_site.kvm-ce-secure-mesh-site ]
-
   name   = "${var.kvm-ce-site-name}-${var.kvm-ce-node-name}"
   memory = var.kvm-ce-memory
   vcpu   = var.kvm-ce-vcpu
@@ -79,25 +78,27 @@ resource "libvirt_domain" "kvm-ce" {
   }
 }
 
-resource "volterra_volterra_securemesh_site" "kvm-ce-secure-mesh-site" {
+resource "volterra_securemesh_site" "kvm-ce-secure-mesh-site" {
   name       = var.kvm-ce-site-name
   namespace  = "system"
 
-  volterra_certified_hw = "kvm-regular-nic-voltmesh"
+  volterra_certified_hw = var.kvm-certified-hw
   master_node_configuration {
-    name = var.kvm-ce-host-name
+    name = var.kvm-ce-node-name
   }
 
-  latitude = var.kvm-ce-latitude
-  longitude = var.kvm-ce-longitude
+  coordinates {
+    latitude = var.kvm-ce-latitude
+    longitude = var.kvm-ce-longitude
+  }
 }
 
 resource "volterra_registration_approval" "kvm-ce-site-registration" {
-  depends_on   = [ libvirt_domain.kvm-ce, volterra_volterra_securemesh_site.kvm-ce-secure-mesh-site ]
+  depends_on   = [ libvirt_domain.kvm-ce, volterra_securemesh_site.kvm-ce-secure-mesh-site ]
 
   cluster_name = var.kvm-ce-site-name
   hostname     = var.kvm-ce-node-name
   cluster_size = 1
   retry        = 5
-  wait_time    = 60
+  wait_time    = 120
 }

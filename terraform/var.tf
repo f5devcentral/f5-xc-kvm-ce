@@ -38,6 +38,11 @@ variable "kvm-ce-longitude" {
     default = "121.89"
 }
 
+variable "kvm-ce-certified-hw" {
+  description = "KVM CE certified hardware"
+  default = "kvm-voltmesh"
+}
+
 variable "site-registration-token" {
     description = "F5XC environment registration token"
 }

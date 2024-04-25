@@ -19,6 +19,7 @@ data "template_file" "kvm-ce-user_data" {
     "host-name"                           = var.kvm-ce-node-name  
     "latitude"                            = var.kvm-ce-latitude
     "longitude"                           = var.kvm-ce-longitude
+    "certified-hw"                        = var.kvm-ce-certified-hw
   }
 }
 

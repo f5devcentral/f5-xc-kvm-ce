@@ -15,7 +15,7 @@ variable "kvm-ce-vcpu" {
 
 variable "kvm-ce-site-name" {
   description = "KVM CE site/cluster name"
-  default = "kvm-ce-with-auto-register"
+  default = "kvm-ce-auto"
 }
 
 variable "kvm-ce-node-name" {
@@ -36,6 +36,11 @@ variable "kvm-ce-latitude" {
 variable "kvm-ce-longitude" {
   description = "KVM CE node longitude"
   default = "-121.89"
+}
+
+variable "kvm-ce-certified-hw" {
+  description = "KVM CE certified hardware"
+  default = "kvm-voltmesh"
 }
 
 variable "api-creds-p12" {

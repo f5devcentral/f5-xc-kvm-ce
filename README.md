@@ -45,7 +45,7 @@ To use libvirt xml extension there is a need to install xsltproc package (i.e. s
             network_name = "inside"
         }
 
-Please configure F5XC Secure Mesh Site with interface assignment to Outside and Inside.
+Please configure F5XC Secure Mesh Site with interface assignment to Outside and Inside. Please also change `kvm-ce-certified-hw` value from `kvm-voltmesh` to `kvm-regular-nic-voltmesh`.
 
 
 ---
