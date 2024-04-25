@@ -82,7 +82,7 @@ resource "volterra_securemesh_site" "kvm-ce-secure-mesh-site" {
   name       = var.kvm-ce-site-name
   namespace  = "system"
 
-  volterra_certified_hw = var.kvm-certified-hw
+  volterra_certified_hw = var.kvm-ce-certified-hw
   master_node_configuration {
     name = var.kvm-ce-node-name
   }
